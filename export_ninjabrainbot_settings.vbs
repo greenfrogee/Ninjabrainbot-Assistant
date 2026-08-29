@@ -1,0 +1,3 @@
+Set WshShell = CreateObject("WScript.Shell")
+
+WshShell.Run "powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command ""$path='HKCU:\Software\JavaSoft\Prefs\ninjabrainbot'; $data=Get-ItemProperty $path | Select-Object * -ExcludeProperty PSPath,PSParentPath,PSChildName,PSDrive,PSProvider; $data | ConvertTo-Json -Depth 10 | Set-Content -Path '" & CreateObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName) & "\ninjabrainbot_settings_send_to_discord.json' -Encoding UTF8""", 0, True
