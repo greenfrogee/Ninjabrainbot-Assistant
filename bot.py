@@ -95,10 +95,6 @@ async def check_standardsettings(file):
     standardsettings_sensitivity = standardsettings.get("mouseSensitivity")
     standardsettings_enabled = standardsettings.get("toggleStandardSettings")
     sensitivity_enabled = standardsettings.get("mouseSensitivity", {}).get("enabled") if isinstance(standardsettings.get("mouseSensitivity"), dict) else True
-
-    print(f"[Debug] SENSITIVITY ENABLED? {sensitivity_enabled}")
-    print(f"[Debug] STANDARDSETTINGS SENSITIVITY:? {standardsettings_sensitivity}")
-    print(f"[Debug] STANDARDSETTINGS ENABLED? {standardsettings_enabled}")
     
     if (standardsettings_enabled == True):
         if (sensitivity_enabled != True):
