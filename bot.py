@@ -93,15 +93,19 @@ async def check_standardsettings(file):
     issues = 0
 
     standardsettings_sensitivity = standardsettings.get("mouseSensitivity")
+    standardsettings_enabled = standardsettings.get("toggleStandardSettings")
+    sensitivity_enabled = standardsettings.get("mouseSensitivity", {}).get("enabled") if isinstance(standardsettings.get("mouseSensitivity"), dict) else True
 
-    if (
-        standardsettings_sensitivity is not None
-        and standardsettings_sensitivity != 0.02291165
-        and standardsettings_sensitivity != 0.02291164919734001
-    ):
-        issues += 1
-        description += f"\n - Your mouseSensitivity, `{standardsettings_sensitivity}`, in `standardsettings.json` is not set to `0.02291165`. Change it and use Ctrl + S to save."
-
+    print(f"[Debug] SENSITIVITY ENABLED? {sensitivity_enabled}")
+    print(f"[Debug] STANDARDSETTINGS SENSITIVITY:? {standardsettings_sensitivity}")
+    print(f"[Debug] STANDARDSETTINGS ENABLED? {standardsettings_enabled}")
+    
+    if (standardsettings_enabled == True):
+        if (sensitivity_enabled != True):
+            return issues, description
+        elif (standardsettings_sensitivity != None and standardsettings_sensitivity != 0.02291165 and standardsettings_sensitivity != 0.0229116491973400):
+            issues += 1
+            description += f"\n - Your mouseSensitivity, `{standardsettings_sensitivity}`, in `standardsettings.json` is not set to `0.02291165`. Change it and use Ctrl + S to save."
     return issues, description
 
 
